@@ -1,0 +1,16 @@
+<!--pages/home/home.wxml--> 
+<!-- 首页轮播图片  -->
+<view class='swiper'>
+  <swiper indicator-dots="true" autoplay="true" interval="3000">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" width="100%" height="150"/>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+<!-- 搜索框  -->
+<component-search></component-search>
+
+<!-- 帖子分类 -->
