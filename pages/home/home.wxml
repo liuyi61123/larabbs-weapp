@@ -1,4 +1,5 @@
 <!--pages/home/home.wxml--> 
+<import src="/templates/topic_list.wxml"/>
 <!-- 首页轮播图片  -->
 <view class='swiper'>
   <swiper indicator-dots="true" autoplay="true" interval="3000">
@@ -13,4 +14,8 @@
 <!-- 搜索框  -->
 <component-search></component-search>
 
-<!-- 帖子分类 -->
+<!-- 帖子列表 -->
+<template is="topic_list" data="{{topics}}"/>
+
+
+

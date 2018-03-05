@@ -1,0 +1,21 @@
+<!-- 文章列表 -->
+<template name="topic_list">
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd">
+      <block wx:for="{{topics}}">
+       <navigator url="/pages/topic/topic?id={{item.id}}">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title weui-media-box__title_in-text">{{item.title}}</view>
+          <view class="weui-media-box__desc">{{item.desc}}</view>
+        </view>
+       </navigator>
+      </block>
+    </view>
+    <view class="weui-panel__ft">
+        <view class="weui-cell weui-cell_access weui-cell_link">
+          <view class="weui-cell__bd">查看更多</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </view>
+    </view>
+  </view>
+</template>
