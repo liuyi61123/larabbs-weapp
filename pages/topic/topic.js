@@ -1,23 +1,19 @@
 // pages/topic/topic.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    topic:''
+    topic:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      topic:{
-        id: options.id,
-        content: options.id + 'content'
-      }
-    })   
+  
   },
 
   /**
@@ -30,8 +26,24 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function (options) {
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.host + '/api/topics/' + options.id +'?include=user,category',
+      success: res => {
+        console.log(res)
+        var data = res.data;
+        this.setData({
+          topic: {
+            id: data.id,
+            body: data.body
+          }
+        }) 
+      },
+      fail: err => {
+        console.log(err)
+      }
+    });
   },
 
   /**

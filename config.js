@@ -3,7 +3,7 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-var host = 'https://api.liuyi.ac.cn';
+var host = 'https://bbs.liuyi.ac.cn';
 
 var config = {
 
@@ -12,16 +12,26 @@ var config = {
     host,
 
     // 登录地址，用于建立会话
-    loginUrl: `${host}/api/weapp/login`,
+    loginUrl: `${host}/api/socials/weapp/authorizations`,
 
-    // 测试的请求地址，用于测试会话
-    requestUrl: `${host}/api/weapp/user`,
+    // 获取用户信息
+    userUrl: `${host}/api/user`,
 
-    // 测试的信道服务地址
-    tunnelUrl: `${host}/api/weapp/tunnel`,
+    // 保存用户信息
+    userInfoUrl: `${host}/api/user/weapp`,
 
-    // 上传图片接口
-    uploadUrl: `${host}/api/weapp/upload`
+    // 刷新token和删除token
+    refreshTokenUrl: `${host}/api/authorizations/current`,
+
+    // 上传图片
+    imageUrl: `${host}/api/images`,
+
+    // 话题列表
+    topicsUrl: `${host}/api/topics`,
+
+    // 获取推荐资源
+    linkUrl: `${host}/api/links`
+
   }
 };
 

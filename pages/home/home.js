@@ -1,4 +1,5 @@
 // pages/home/home.js
+const app = getApp()
 Page({
 
   /**
@@ -11,21 +12,6 @@ Page({
       'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
     ],
     topics:[
-      {
-        id:1,
-        title:'话题1',
-        desc:'话题1话题1话题1话题1话题1话题1话题1话题1'
-      },
-      {
-        id: 2,
-        title: '话题2',
-        desc: '话题2话题1话题1话题1话题1话题1话题1话题1'
-      },
-      {
-        id: 3,
-        title: '话题3',
-        desc: '话题3话题1话题1话题1话题1话题1话题1话题1'
-      }
     ]
   },
 
@@ -33,7 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -47,7 +33,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.host + '/api/topics/' + 10 + '/new',
+      success: res => {
+        console.log(res)
+        this.setData({
+          topics: res.data.data
+        })
+      },
+      fail: err => {
+        console.log(err)
+      }
+    });
   },
 
   /**
