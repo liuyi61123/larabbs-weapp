@@ -1,13 +1,14 @@
 // pages/list/list.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabs: ["选项一", "选项二", "选项三"],
-    activeIndex: 1,
+    tabs: [],
+    activeIndex: '',
     sliderOffset: 0,
     sliderLeft: 0
   },
@@ -16,6 +17,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取数据
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.categoryUrl,
+      success: res => {
+        console.log(res)
+        this.setData({
+          tabs: res.data.data,
+          activeIndex: res.data.data[0].id
+        })
+      },
+      fail: err => {
+        console.log(err)
+      }
+    });
+
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -76,9 +93,23 @@ Page({
 
   },
   tabClick: function (e) {
+    console.log(e)
+    let id = e.currentTarget.id;
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
+    //获取对应的分类信息列表
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.topicsUrl + '?category_id=' + id +'&include=user,category',
+      success: res => {
+        console.log(res)
+      },
+      fail: err => {
+        console.log(err)
+      }
+    });
+
   }
 })

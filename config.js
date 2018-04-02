@@ -29,6 +29,9 @@ var config = {
     // 话题列表
     topicsUrl: `${host}/api/topics`,
 
+    // 分类列表
+    categoryUrl: `${host}/api/categories`,
+
     // 获取推荐资源
     linkUrl: `${host}/api/links`
 

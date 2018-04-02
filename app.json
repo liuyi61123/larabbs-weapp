@@ -1,21 +1,21 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/index/index",
+    "pages/topic/topic",    
+    "pages/user/user",
     "pages/logs/logs",
-    "pages/topic/topic",
     "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "Larabbs",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "list": [
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "text": "首页"
       },
       {
@@ -23,7 +23,7 @@
         "text": "分类"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/user/user",
         "text": "我的"
       }
     ]

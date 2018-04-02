@@ -13,7 +13,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.host + '/api/topics/' + options.id + '?include=user,category',
+      success: res => {
+        console.log(res)
+        var data = res.data;
+        this.setData({
+          topic: {
+            id: data.id,
+            body: data.body
+          }
+        })
+      },
+      fail: err => {
+        console.log(err)
+      }
+    });
   },
 
   /**
@@ -26,24 +42,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (options) {
-    app.request({
-      method: 'GET',
-      url: app.globalData.config.service.host + '/api/topics/' + options.id +'?include=user,category',
-      success: res => {
-        console.log(res)
-        var data = res.data;
-        this.setData({
-          topic: {
-            id: data.id,
-            body: data.body
-          }
-        }) 
-      },
-      fail: err => {
-        console.log(err)
-      }
-    });
+  onShow: function () {
+   
   },
 
   /**

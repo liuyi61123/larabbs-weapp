@@ -1,10 +1,21 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatar}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.name}}</text>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{userInfo.introduction}}</text>
-  </view>
+<!--pages/home/home.wxml--> 
+<import src="/templates/topic_list.wxml"/>
+<!-- 首页轮播图片  -->
+<view class='swiper'>
+  <swiper indicator-dots="true" autoplay="true" interval="3000">
+    <block wx:for="{{imgUrls}}">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" width="100%" height="150"/>
+      </swiper-item>
+    </block>
+  </swiper>
 </view>
+
+<!-- 搜索框  -->
+<component-search></component-search>
+
+<!-- 帖子列表 -->
+<template is="topic_list" data="{{topics}}"/>
+
+
+
