@@ -30,28 +30,9 @@ App({
             },
             success: res => {
               //登录成功
+              console.log(res)
               this.globalData.token = res.data.token_type + ' ' + res.data.access_token
               this.globalData.expiration = (res.data.expires_in*1000) + Date.parse(new Date())//设置token过期时间
-              // 获取用户信息
-              wx.getSetting({
-                success: res => {
-                  if (res.authSetting['scope.userInfo']) {
-                    // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-                    this.getUserInfo();
-                  } else {
-                    //获取用户授权
-                    wx.authorize({
-                      scope: 'scope.userInfo',
-                      success: res => {
-                        this.getUserInfo();
-                      },
-                      fail: err => {
-                        //用户不同意
-                      }
-                    })
-                  }
-                }
-              })
             },
             fail: err => {
               //登录失败
@@ -84,52 +65,46 @@ App({
       }
     })
   },
-  //获取用户信息
-  getUserInfo: function () {
-    wx.getUserInfo({
-      withCredentials: true,
-      success: res => {
-        // 可以将 userInfo 发送给后台
-        this.request({
-          needAuth:true,
-          header: {
-            'Authorization': this.globalData.token
-          },
-          method: 'POST',
-          url: config.service.userInfoUrl,
-          data: res,
-          success: res => {
-            console.log(res)
-            this.globalData.userInfo = res.data
-          },
-          fail: err => {
-            console.log(err)
-          }
-        })
-      }
-    })
-  },
   //自己封装的request组件
   request:function(data){
+    let header  = {}
     //先判断是否需要用户认证，再判断token是否过期
     if(data.needAuth || false){
-      if (this.expiration < Date.parse(new Date())){
+      if (this.globalData.expiration < Date.parse(new Date())){
         //token过期了，先刷新token
         this.refreshToken()
       } 
+      header = {
+        'Authorization': this.globalData.token
+      }
     } 
     wx.request({
-      header: data.header ||{},
+      header: header,
       method: data.method,
       url: data.url,
       data: data.data || {},
       success: data.success,
-      fail: data.fail || {}
+      fail: data.fail || {},
+      complete: data.complete || function (com) {
+        wx.hideLoading()
+        if (com.statusCode == 429) {
+          wx.showModal({
+            content: '操作频繁，请稍后再试',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('用户点击确定')
+              }
+            }
+          });
+        } else if (com.statusCode == 401){
+          //没有登录
+        }
+      },
     })
   },
   globalData: {
     config:config,
-    userInfo: null,
     token: '',//token
     expiration:''//token过期时间
   }

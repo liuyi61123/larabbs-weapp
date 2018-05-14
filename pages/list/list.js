@@ -8,7 +8,9 @@ Page({
    */
   data: {
     tabs: [],
+    listData:[],
     activeIndex: '',
+    page:1,
     sliderOffset: 0,
     sliderLeft: 0
   },
@@ -27,6 +29,7 @@ Page({
           tabs: res.data.data,
           activeIndex: res.data.data[0].id
         })
+        this.getListData(res.data.data[0].id)
       },
       fail: err => {
         console.log(err)
@@ -48,7 +51,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
@@ -83,7 +86,25 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    //获取更多文章信息
+    wx.showLoading({
+      title: '加载中',
+    })
+    //发送请求
+    let page = this.data.page+1
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.topicsUrl + '?category_id=' + this.data.activeIndex + '&page=' + page + '&include=user,category',
+      success: res => {
+        console.log(res)
+        this.setData({
+          listData: this.data.listData.concat(res.data.data),
+          page: page,
+        })
+        wx.hideLoading()
+      }
+    });
+    
   },
 
   /**
@@ -97,19 +118,25 @@ Page({
     let id = e.currentTarget.id;
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
-      activeIndex: e.currentTarget.id
-    });
-    //获取对应的分类信息列表
-    app.request({
-      method: 'GET',
-      url: app.globalData.config.service.topicsUrl + '?category_id=' + id +'&include=user,category',
-      success: res => {
-        console.log(res)
-      },
-      fail: err => {
-        console.log(err)
-      }
+      activeIndex: e.currentTarget.id,
+      page: 1,
     });
 
+    //获取对应的分类信息列表
+    this.getListData(id)
+
+  },
+  getListData(id){
+    app.request({
+      method: 'GET',
+      url: app.globalData.config.service.topicsUrl + '?category_id=' + id + '&page=' + this.data.page + '&include=user,category',
+      success: res => {
+        console.log(res)
+        this.setData({
+          listData: res.data.data,
+        })
+      }
+    })
   }
+
 })

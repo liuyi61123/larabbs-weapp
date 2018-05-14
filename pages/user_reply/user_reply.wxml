@@ -1,0 +1,13 @@
+<!--pages/user_reply/user_reply.wxml-->
+<view class="weui-cells__title">评论列表</view>
+<view wx:if="{{userReplies.length >0 }}" class="weui-cells weui-cells_after-title">
+  <block wx:for="{{userReplies}}" wx:key="*this"> 
+    <navigator url="/pages/topic/topic?id={{item.topic_id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">cell {{item.content}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+    </navigator>
+  </block> 
+</view>
+<view class="weui-loadmore weui-loadmore_line" wx:elif="{{userReplies.length <= 0}}">
+  <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+ </view>
