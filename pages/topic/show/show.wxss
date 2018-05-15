@@ -1,0 +1,26 @@
+/* pages/topic/show/show.wxss */
+page{
+    background-color: #FFFFFF;
+    margin-bottom: 40px;
+}
+image{
+    margin: 4px 0;
+}
+/*定位  */
+.reply-form{
+  background-color:#fff; 
+  width: 100%;
+  position: fixed;
+  height: 40px;
+  flex-direction:row;
+  bottom:0;
+  border: 1px solid #ccc;
+}
+.reply-input{
+  width: 80%;
+  height: 38px;
+  float: left;
+}
+.reply-btn{
+ font-size: 16px;
+}

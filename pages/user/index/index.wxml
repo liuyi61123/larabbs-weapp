@@ -1,29 +1,28 @@
-<!--index.wxml-->
+<!--pages/user/index/index.wxml-->
 <view class="">
   <view class="userinfo">
-      <open-data  bindtap="bindViewTap" class="userinfo-avatar" type="userAvatarUrl" background-size="cover"></open-data>
-      <!-- <image src="{{userInfo.avatar}}" background-size="cover"></image> -->
-      <open-data class="userinfo-nickname" type="userNickName"></open-data>
+      <image bindtap="bindViewTap" class="userinfo-avatar" background-size="cover" src="{{userInfo.avatar}}"/>
+      <view class="userinfo-nickname">{{userInfo.name}}</view>
   </view>
   <view class="weui-panel">
     <view class="weui-panel__bd">
       <view class="weui-media-box weui-media-box_small-appmsg">
         <view class="weui-cells weui-cells_in-small-appmsg">
-            <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="/pages/user/edit/edit" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd"><image src="{{icon20}}" style="width: 20px;height: 20px;margin-right: 5px" /></view>
                 <view class="weui-cell__bd weui-cell_primary">
                     <view>个人信息</view>
                 </view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </navigator>
-            <navigator url="/pages/user_topic/user_topic" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="/pages/user/topic/topic" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd"><image src="{{icon20}}" style="width: 20px;height: 20px;margin-right: 5px" /></view>
                 <view class="weui-cell__bd weui-cell_primary">
                     <view>我的文章</view>
                 </view>
                 <view class="weui-cell__ft weui-cell__ft_in-access"></view>
             </navigator>
-            <navigator url="/pages/user_reply/user_reply" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <navigator url="/pages/user/reply/reply" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
                 <view class="weui-cell__hd"><image src="{{icon20}}" style="width: 20px;height: 20px;margin-right: 5px" /></view>
                 <view class="weui-cell__bd weui-cell_primary">
                     <view>我的评论</view>
@@ -38,3 +37,4 @@
     <button class="weui-btn" type="warn">退出登录</button>
   </view>
 </view>
+

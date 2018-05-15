@@ -33,6 +33,16 @@ App({
               console.log(res)
               this.globalData.token = res.data.token_type + ' ' + res.data.access_token
               this.globalData.expiration = (res.data.expires_in*1000) + Date.parse(new Date())//设置token过期时间
+
+              //获取用户信息
+              this.request({
+                needAuth: true,
+                method: 'GET',
+                url: this.globalData.config.service.userUrl,
+                success: res => {
+                  this.globalData.userInfo = res.data
+                }
+              })
             },
             fail: err => {
               //登录失败
@@ -104,6 +114,7 @@ App({
     })
   },
   globalData: {
+    userInfo:{},
     config:config,
     token: '',//token
     expiration:''//token过期时间

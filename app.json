@@ -1,12 +1,14 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/topic/topic",
-    "pages/user/user",
     "pages/logs/logs",
-    "pages/list/list",
-    "pages/user_topic/user_topic",
-    "pages/user_reply/user_reply"
+    "pages/topic/index/index",
+    "pages/topic/show/show",
+    "pages/user/topic/topic",
+    "pages/user/reply/reply",
+    "pages/user/index/index",
+    "pages/user/edit/edit",
+    "pages/user/show/show"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -21,11 +23,11 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/list/list",
-        "text": "分类"
+        "pagePath": "pages/topic/index/index",
+        "text": "话题"
       },
       {
-        "pagePath": "pages/user/user",
+        "pagePath": "pages/user/index/index",
         "text": "我的"
       }
     ]

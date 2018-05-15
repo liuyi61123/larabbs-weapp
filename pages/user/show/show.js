@@ -1,4 +1,4 @@
-// pages/user_reply/user_reply.js
+// pages/user/show/show.js
 const app = getApp()
 Page({
 
@@ -6,24 +6,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userReplies:[]
+    id:'',
+    userinfo:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //获取用户发布的帖子
-    app.request({
-      needAuth: true,
-      method: 'GET',
-      url: app.globalData.config.service.host + '/api/users/replies',
-      success: res => {
-        console.log(res)
-        this.setData({
-          userReplies: res.data.data
-        })
-      }
+    this.setData({
+      id: options.id
     })
   },
 
