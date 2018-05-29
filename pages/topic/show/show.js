@@ -18,7 +18,7 @@ Page({
     //获取文章详情
     app.request({
       method: 'GET',
-      url: app.globalData.config.service.host + '/api/topics/' + options.id + '?include=user,category',
+      url: app.globalData.config.service.host + '/topics/' + options.id + '?include=user,category',
       success: res => {
         console.log(res)
         this.setData({
@@ -83,7 +83,7 @@ Page({
   getReplies:function(id){
     app.request({
       method: 'GET',
-      url: app.globalData.config.service.host + '/api/topics/' + id + '/replies?include=user',
+      url: app.globalData.config.service.host + '/topics/' + id + '/replies?include=user',
       success: res => {
         console.log(res)
         this.setData({
@@ -108,7 +108,7 @@ Page({
         needAuth:true,
         method: 'POST',
         data: form,
-        url: app.globalData.config.service.host + '/api/topics/' + this.data.topic.id + '/replies',
+        url: app.globalData.config.service.host + '/topics/' + this.data.topic.id + '/replies',
         success: res => {
           console.log(res)
           //更新评论列表

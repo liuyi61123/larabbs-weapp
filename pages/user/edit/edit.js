@@ -19,19 +19,25 @@ Page({
    */
   onLoad: function (options) {
     //获取用户个人信息
-    app.request({
-      needAuth:true,
-      method: 'GET',
-      url: app.globalData.config.service.userUrl,
-      success: res => {
-        console.log(res)
-        this.setData({
-          name: res.data.name,
-          avatar: res.data.avatar,
-          email: res.data.email,
-          introduction: res.data.introduction
-        })
-      }
+    // app.request({
+    //   needAuth:true,
+    //   method: 'GET',
+    //   url: app.globalData.config.service.userUrl,
+    //   success: res => {
+    //     console.log(res)
+    //     this.setData({
+    //       name: res.data.name,
+    //       avatar: res.data.avatar,
+    //       email: res.data.email,
+    //       introduction: res.data.introduction
+    //     })
+    //   }
+    // })
+    this.setData({
+      name: app.globalData.userInfo.name,
+      avatar: app.globalData.userInfo.avatar,
+      email: app.globalData.userInfo.email,
+      introduction: app.globalData.userInfo.introduction
     })
   },
 
@@ -114,6 +120,27 @@ Page({
   },
   //提交表单
   userSubmit:function(e){
+    let data = e.detail.value
+    data.avatar = this.data.avatar
 
+    wx.showLoading({
+      title:'提交中'
+    })
+    //修改登录用户信息
+    app.request({
+      needAuth: true,
+      method: 'PUT',
+      data: data,
+      url: app.globalData.config.service.userUrl,
+      success: res => {
+        app.updateUserInfo(res.data)
+        wx.hideLoading()
+
+        wx.showToast({
+          title:'更新成功',
+          icon:'success'
+        })
+      }
+    })
   }
 })

@@ -110,8 +110,16 @@ App({
         } else if (com.statusCode == 401){
           //没有登录
         }
-      },
+        else if (com.statusCode == 422) {
+          //没有登录
+        }else{
+
+        }
+      }
     })
+  },
+  updateUserInfo:function(userInfo){
+    this.globalData.userInfo = userInfo
   },
   globalData: {
     userInfo:{},

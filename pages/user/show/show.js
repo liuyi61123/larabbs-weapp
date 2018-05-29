@@ -7,7 +7,7 @@ Page({
    */
   data: {
     id:'',
-    userinfo:{}
+    userInfo:{}
   },
 
   /**
@@ -16,6 +16,20 @@ Page({
   onLoad: function (options) {
     this.setData({
       id: options.id
+    })
+
+    //获取用户信息
+    app.request({
+      needAuth: true,
+      method: 'GET',
+      url: app.globalData.config.service.userUrl + 's/' + options.id,
+      success: res => {
+        console.log(res)
+        this.setData({
+          userInfo: res.data
+        })
+        console.log(this.data.userInfo)
+      }
     })
   },
 

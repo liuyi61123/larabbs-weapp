@@ -26,7 +26,7 @@ Page({
     //获取用户发布的帖子
     app.request({
       method: 'GET',
-      url: app.globalData.config.service.host + '/api/users/'+this.data.id+'/topics?include=user,category',
+      url: app.globalData.config.service.host + '/users/'+this.data.id+'/topics?include=user,category',
       success: res => {
         console.log(res)
         this.setData({

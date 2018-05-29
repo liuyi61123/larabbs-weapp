@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     app.request({
       method: 'GET',
-      url: app.globalData.config.service.host + '/api/topics/' + 10 + '/new?include=user,category',
+      url: app.globalData.config.service.host + '/topics/' + 10 + '/new?include=user,category',
       success: res => {
         console.log(res)
         this.setData({
